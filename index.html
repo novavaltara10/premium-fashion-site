@@ -35,13 +35,13 @@ nav a {
 /* HERO */
 .hero {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: 50px;
 }
 
 .hero-text h1 {
-  font-size: 50px;
+  font-size: 45px;
 }
 
 .hero img {
@@ -49,30 +49,41 @@ nav a {
   border-radius: 10px;
 }
 
-/* BUTTON */
-.btn {
-  padding: 10px 20px;
-  background: #b87b5e;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
+/* CATEGORY */
+.category {
+  padding: 30px;
+}
+
+.cat-items {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+}
+
+.cat-items div {
+  text-align: center;
+}
+
+.cat-items img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
 }
 
 /* PRODUCTS */
-.section {
-  padding: 40px;
+.products {
+  padding: 30px;
 }
 
-.products {
+.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+  gap: 15px;
 }
 
 .card {
   background: white;
-  padding: 15px;
+  padding: 10px;
   border-radius: 10px;
   text-align: center;
 }
@@ -81,19 +92,27 @@ nav a {
   width: 100%;
 }
 
+/* BUTTON */
+.btn {
+  background: #b87b5e;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
 /* CART */
 #cart-box {
   position: fixed;
   right: 0;
   top: 0;
-  width: 250px;
+  width: 220px;
   height: 100%;
   background: white;
   padding: 10px;
   overflow-y: auto;
   border-left: 1px solid #ccc;
 }
-
 </style>
 </head>
 
@@ -108,53 +127,51 @@ nav a {
   </nav>
 </header>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-text">
+  <div>
     <h1>Discover Your Beauty</h1>
     <button class="btn">Shop Now</button>
   </div>
   <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9">
 </section>
 
-<!-- PRODUCTS -->
-<section class="section">
-  <h2>Best Sellers</h2>
+<section class="category">
+  <h2>Categories</h2>
+  <div class="cat-items">
+    <div><img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad"><p>Makeup</p></div>
+    <div><img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519"><p>Skincare</p></div>
+    <div><img src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd"><p>Hair</p></div>
+  </div>
+</section>
 
-  <div class="products">
+<section class="products">
+  <h2>Best Sellers</h2>
+  <div class="grid">
 
     <div class="card">
       <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad">
-      <h3>Serum</h3>
+      <h4>Serum</h4>
       <p>₹999</p>
-      <button class="btn" onclick="addToCart('Serum',999)">Add to Cart</button>
+      <button class="btn" onclick="addToCart('Serum',999)">Add</button>
     </div>
 
     <div class="card">
       <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519">
-      <h3>Moisturizer</h3>
+      <h4>Cream</h4>
       <p>₹799</p>
-      <button class="btn" onclick="addToCart('Moisturizer',799)">Add to Cart</button>
+      <button class="btn" onclick="addToCart('Cream',799)">Add</button>
     </div>
 
     <div class="card">
       <img src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd">
-      <h3>Face Oil</h3>
+      <h4>Oil</h4>
       <p>₹899</p>
-      <button class="btn" onclick="addToCart('Face Oil',899)">Add to Cart</button>
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa">
-      <h3>Cream</h3>
-      <p>₹699</p>
-      <button class="btn" onclick="addToCart('Cream',699)">Add to Cart</button>
+      <button class="btn" onclick="addToCart('Oil',899)">Add</button>
     </div>
 
   </div>
 </section>
 
-<!-- CART -->
 <div id="cart-box">
   <h3>Cart</h3>
   <div id="cart-items"></div>
@@ -163,17 +180,16 @@ nav a {
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function addToCart(name, price) {
-  cart.push({name, price});
+function addToCart(name, price){
+  cart.push({name,price});
   localStorage.setItem("cart", JSON.stringify(cart));
   showCart();
 }
 
-function showCart() {
+function showCart(){
   let box = document.getElementById("cart-items");
   box.innerHTML = "";
-
-  cart.forEach(item => {
+  cart.forEach(item=>{
     box.innerHTML += `<p>${item.name} - ₹${item.price}</p>`;
   });
 }
@@ -182,4 +198,4 @@ showCart();
 </script>
 
 </body>
-  </html>
+</html>
